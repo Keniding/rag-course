@@ -1,0 +1,27 @@
+[
+  {
+    "pregunta": "¿Cuál es el SLA de tiempo de resolución para un incidente P1?",
+    "respuesta_esperada": "4 horas.",
+    "chunk_esperado": "politica_soporte__001"
+  },
+  {
+    "pregunta": "¿Cómo se instala el agente de NovaCloud Backup?",
+    "respuesta_esperada": "Descargando el agente novacloud-agent desde el portal interno, ejecutando novacloud-agent init con el token de la organización, configurando backup.yaml con las rutas a respaldar, y verificando el estado con novacloud-agent status.",
+    "chunk_esperado": "manual_producto__003"
+  },
+  {
+    "pregunta": "¿Cuál es la ventana de despliegue permitida a producción?",
+    "respuesta_esperada": "De lunes a jueves, entre las 9:00 y las 16:00 hora local, salvo hotfixes críticos aprobados por el Gerente de Ingeniería.",
+    "chunk_esperado": "faq_interno__002"
+  },
+  {
+    "pregunta": "¿Cuántos días de retención tiene el plan Business de NovaCloud Backup?",
+    "respuesta_esperada": "30 días.",
+    "chunk_esperado": "manual_producto__002"
+  },
+  {
+    "pregunta": "¿Qué crédito de servicio puede solicitar un cliente si TechNova incumple el SLA de un ticket P1?",
+    "respuesta_esperada": "Un crédito equivalente al 5% de la facturación mensual por cada hora de incumplimiento, con un tope del 30% de la facturación mensual.",
+    "chunk_esperado": "politica_soporte__005"
+  }
+]

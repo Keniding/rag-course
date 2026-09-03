@@ -8,10 +8,11 @@ de bases de datos, buckets de almacenamiento y volúmenes de máquinas virtuales
 
 ## 2. Planes disponibles
 
-- **Plan Starter**: 100 GB de almacenamiento, retención de 7 días, 1 región.
-- **Plan Business**: 1 TB de almacenamiento, retención de 30 días, 3 regiones.
-- **Plan Enterprise**: almacenamiento ilimitado, retención configurable (hasta 365 días),
-  replicación multi-región y cifrado con llaves propias (BYOK).
+| Plan | Almacenamiento | Retención | Regiones | Cifrado |
+|------|-----------------|-----------|----------|---------|
+| Starter | 100 GB | 7 días | 1 | AES-256 |
+| Business | 1 TB | 30 días | 3 | AES-256 |
+| Enterprise | Ilimitado | Hasta 365 días (configurable) | Multi-región | AES-256 + llaves propias (BYOK) |
 
 ## 3. Instalación del agente
 

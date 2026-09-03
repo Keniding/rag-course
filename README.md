@@ -60,7 +60,10 @@ s3/
 ├── 02_chunking_contenido/
 ├── 03_embeddings_vectorstore/
 ├── 04_busqueda_generacion/
-└── 05_tecnicas_avanzadas/   → extra: búsqueda híbrida (BM25) + re-ranking
+├── 05_tecnicas_avanzadas/         → extra: búsqueda híbrida (BM25) + re-ranking
+├── 06_visualizacion_embeddings/   → extra: gráfico interactivo de los embeddings (UMAP + Plotly)
+├── 07_evaluacion_ragas/           → extra: evaluación del pipeline con RAGAS
+└── 08_hyde/                       → extra: HyDE (respuesta hipotética antes de buscar)
 ```
 
 Cada carpeta numerada corresponde a una etapa del pipeline y contiene:
@@ -92,6 +95,15 @@ uv run python 04_busqueda_generacion/rag_query.py "¿Cuál es el SLA para un inc
 # opcional: búsqueda híbrida + re-ranking (ver 05_tecnicas_avanzadas/README.md)
 uv run python 05_tecnicas_avanzadas/hybrid_search.py "¿Cómo se instala el agente de NovaCloud Backup?"
 uv run python 05_tecnicas_avanzadas/reranking.py "¿Cómo se instala el agente de NovaCloud Backup?"
+
+# opcional: visualizar los embeddings en 2D o 3D (ver 06_visualizacion_embeddings/README.md)
+uv run python 06_visualizacion_embeddings/visualizar_embeddings.py "¿Cómo se instala el agente de NovaCloud Backup?" --dim 3
+
+# opcional: evaluar el pipeline con RAGAS (ver 07_evaluacion_ragas/README.md)
+uv run python 07_evaluacion_ragas/evaluar_ragas.py
+
+# opcional: HyDE, requiere ANTHROPIC_API_KEY (ver 08_hyde/README.md)
+uv run python 08_hyde/hyde_search.py "¿Cuántos días de retención tiene el plan Business de NovaCloud Backup?"
 ```
 
 Si necesitás agregar una dependencia nueva más adelante, usá `uv add <paquete>`
@@ -103,10 +115,19 @@ en vez de `pip install` — así queda registrada en `pyproject.toml` y fijada e
 > Corré `chcp 65001` antes, o antepone `$env:PYTHONIOENCODING="utf-8";` a los
 > comandos — el contenido de los archivos generados siempre es UTF-8 correcto.
 
-## Sobre el LLM usado en la etapa 4
+## Sobre el LLM usado (etapas 04, 07 y 08)
 
-El script de generación usa la API de **Anthropic (Claude)**. Si no tienes una
-`ANTHROPIC_API_KEY` configurada, el script cae automáticamente a un modo
-**extractivo** (sin LLM) que arma la respuesta directamente con los fragmentos
-recuperados, para que puedas validar la parte de *retrieval* sin necesitar una
-API key. Ver `04_busqueda_generacion/README.md` para más detalle.
+Estas tres etapas usan la API de **Anthropic (Claude)**. Sin una
+`ANTHROPIC_API_KEY` configurada:
+
+- **Etapa 04**: cae a un modo **extractivo** (sin LLM) que arma la respuesta
+  directamente con los fragmentos recuperados — permite validar el
+  *retrieval* sin costo.
+- **Etapa 07 (RAGAS)**: calcula solo métricas de retrieval simplificadas
+  (sin LLM); `faithfulness` y `answer_relevancy` se omiten.
+- **Etapa 08 (HyDE)**: solo puede mostrar la búsqueda directa; el lado HyDE
+  de la comparación no tiene un modo sin LLM razonable (HyDE *es* el uso del
+  LLM), así que queda pendiente de validar con una key real.
+
+Todo lo demás (etapas 01, 02, 03, 05 y 06) es 100% local, sin ninguna API
+externa de pago.
