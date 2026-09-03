@@ -1,0 +1,6 @@
+.idea/
+.claude/
+.venv/
+*.py
+data/chroma_db/
+data/processed/
